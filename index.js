@@ -71,9 +71,13 @@ async function startBot() {
     const saveCreds = () => writeData(state.creds, 'creds');
 
     function connectToWhatsApp() {
+        const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+        const pino = require('pino');
+        
         const sock = makeWASocket({
             printQRInTerminal: true,
             auth: state,
+            logger: pino({ level: 'silent' }), // Hide verbose background sync warnings
             defaultQueryTimeoutMs: undefined
         });
 
