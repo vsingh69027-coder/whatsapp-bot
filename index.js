@@ -3,7 +3,15 @@ const { MongoStore } = require('wwebjs-mongo');
 const mongoose = require('mongoose');
 const qrcode = require('qrcode-terminal');
 const cron = require('node-cron');
+const express = require('express');
 require('dotenv').config();
+
+// --- DUMMY SERVER FOR RENDER ---
+const app = express();
+const PORT = process.env.PORT || 3000;
+app.get('/', (req, res) => res.send('WhatsApp Bot is running!'));
+app.listen(PORT, () => console.log(`🌍 Server is listening on port ${PORT}`));
+// -------------------------------
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const TARGET_NUMBER = process.env.TARGET_NUMBER || '919876543210'; 
